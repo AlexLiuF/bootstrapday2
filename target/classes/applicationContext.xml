@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="personservice" class="com.baizhi.service.impl.PersonServiceImpl" scope="singleton"/>
+    <bean id="personAction" class="com.baizhi.action.PersonAction" scope="prototype">
+        <property name="psi" ref="personservice"></property>
+    </bean>
+    <bean id="person" class="com.baizhi.entity.Person" scope="prototype"></bean>
+</beans>

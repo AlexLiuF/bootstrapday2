@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.PersonDao">
+    <resultMap id="PersonMap" type="com.baizhi.entity.Person">
+        <id column="person_id"  property="id"/>
+        <result column="person_name" property="name"/>
+        <result column="person_age" property="age"/>
+        <result column="person_sex" property="sex"/>
+        <result column="person_mobile" property="mobile"/>
+        <result column="person_birthday" property="brithday"/>
+    </resultMap>
+    <select id="selectAll" resultMap="PersonMap">
+        select * from t_person
+    </select>
+    <!--根据ids删除-->
+    <delete id="deleteById">
+        delete from t_person where person_id in
+        <foreach collection="list" item="ids" open="(" close=")" separator=",">
+            #{ids}
+        </foreach>
+    </delete>
+    <!--根据条件查询-->
+    <select id="selectAllByPerson" resultMap="PersonMap">
+        select * from t_person
+        <where>
+            <if test="search != null">
+                person_name like concat('%',#{search},'%')
+            </if>
+        </where>
+        order by ${sort} ${order}
+        limit #{offset},#{limit}
+    </select>
+    <!--查询条数-->
+    <select id="selectCount" resultType="Integer">
+        select count(*) from t_person
+    </select>
+    <!--插入-->
+    <insert id="insertPerson">
+        insert into t_person value(null,#{name},#{age},#{sex},#{mobile},#{brithday})
+    </insert>
+    <!--根据id删除-->
+    <delete id="removePerson">
+        delete from t_person where person_id=#{id}
+    </delete>
+    <!--根据id查询-->
+    <select id="selectById" resultMap="PersonMap">
+        select * from t_person where person_id=#{id}
+    </select>
+    <!--修改-->
+    <update id="updatePerson">
+        update t_person set person_name=#{name},person_age=#{age},person_sex=#{sex},person_mobile=#{mobile},person_birthday=#{brithday} where person_id=#{id}
+    </update>
+</mapper>

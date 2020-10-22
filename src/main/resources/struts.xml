@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="person" extends="json-default" namespace="/">
+		<action name="selectAll" class="personAction" method="selectAll">
+			<result type="json" name="success">
+				<param name="root">action</param>
+				<param name="includeProperties">list</param>
+			</result>
+		</action>
+		<action name="deleteById" class="personAction" method="deleteById">
+			<result type="json" name="success">
+				<param name="includeProperties">status</param>
+			</result>
+		</action>
+		<action name="selectByPerson" class="personAction" method="selectByPerson">
+			<result type="json" name="success">
+<!--				<param name="root">action</param>-->
+				<param name="excludeProperties">id,ids,status,name,sex,list,age,mobile,brithday,person</param>
+<!--				<param name="includeProperties">rows,total</param>-->
+			</result>
+		</action>
+		<action name="addPerson" class="personAction" method="addPerson">
+			<result type="json" name="success">
+				<param name="includeProperties">status</param>
+			</result>
+		</action>
+		<action name="removePerson" class="personAction" method="removePerson">
+			<result type="json" name="success">
+				<param name="root">action</param>
+				<param name="includeProperties">status</param>
+			</result>
+		</action>
+		<action name="showOneUser" class="personAction" method="showOneUser">
+			<result type="json" name="success">
+				<param name="excludeProperties">id,ids,status,name,sex,list,age,mobile,brithday,rows,total,limit,offset,order,search,sort</param>
+			</result>
+		</action>
+		<action name="updatePerson" class="personAction" method="updatePerson">
+			<result type="json" name="success">
+				<param name="includeProperties">status</param>
+			</result>
+		</action>
+	</package>
+
+</struts>
+                                                                                                                                                            
